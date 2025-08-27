@@ -1,6 +1,6 @@
 wait <- Sys.sleep
-n <- 2e4
-t <-  0.0001
+n <- 6e4
+t <-  0.0002
 
 
 
@@ -17,6 +17,7 @@ for (i in 1:n) {
   if (i %% 10 == 0) cat(vacio) else cat("|")
   wait(t)
 }
+# !
 
 # genera una especie de lluvia regular con fondo vacío
 for (i in 1:n) {
@@ -75,7 +76,7 @@ for (i in 1:n) {
   rayas <- paste(rep("|", cantidad), collapse = "")
   vacio <- paste(rep(" ", cantidad), collapse = "")
   if (i %% 2 == 0) cat(vacio) else cat(rayas)
-  wait(t)
+  wait(t*4)
 }
 
 # lienzo blanco con puntos esparcidos
@@ -83,7 +84,7 @@ for (i in rpois(n, 10)) {
   rayas <- paste(rep("|", i), collapse = "")
   vacio <- " "
   if (i %% 2 == 0) cat(vacio) else cat(rayas)
-  wait(t)
+  wait(t*4)
 }
 
 # distribución poisson, muy ruidosa con figuras geométricas esporádicas
@@ -93,6 +94,7 @@ for (i in rpois(n, 1)) {
   if (i %% 2 == 0) cat(vacio) else cat(rayas)
   wait(t)
 }
+# !!
 
 # secuencia de pares parejos, genera barras verticales o diagonales al cambiar cantidad de columnas
 for (i in 1:n) {
@@ -102,6 +104,7 @@ for (i in 1:n) {
   if (i %% 2 == 0) cat(vacio) else cat(rayas)
   wait(1e-3)
 }
+# ! al hacer zoom al terminal
 
 
 # intervalo regular que parece panal
