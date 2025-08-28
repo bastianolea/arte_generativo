@@ -17,6 +17,7 @@ ui <- page_fillable(
   # desactivar parpadeo al cargar
   busyIndicatorOptions(fade_opacity = 1),
   
+  # css
   tags$style(".form-control {
              font-size:80%;
              padding: .2rem .4rem;
