@@ -1,19 +1,16 @@
 generador <- function(
-    modo = 8,
-    t = 0.001,
+    modo = 8, # algoritmo
+    t = 0.001, # tiempo entre pasos
     simbolo = "|", vacio = " ",
-    n = 1e4,
+    n = 1e4, # duración del loop
     rng_min = 1,
     rng_max = 18) {
   
-  # archivo
-  con <- "output.txt"
-  
-  wait <- Sys.sleep
+  t <- ifelse(t == 0, 0.001, t)
   
   # función que escribe al archivo de texto
   imprimir <- function(texto) {
-    write(texto, file = con, sep = "", append = TRUE) # al archivo
+    write(texto, file = "output.txt", sep = "", append = TRUE) # al archivo
   }
   
   # modos
@@ -29,7 +26,7 @@ generador <- function(
       }
       
       imprimir(texto)
-      wait(t/2)
+      Sys.sleep(t/2)
     }
     
   } else if (modo == 8) {
@@ -44,7 +41,7 @@ generador <- function(
       }
       
       imprimir(texto)
-      wait(t)
+      Sys.sleep(t)
     }
   }
 }

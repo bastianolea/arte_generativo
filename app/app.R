@@ -46,10 +46,17 @@ ui <- page_fillable(
          ),
          
          numericInput("tiempo", "tiempo",
-                      value = 0.009,
+                      value = 0.01,
                       min = 0.001,
                       max = 0.1,
                       step = 0.001,
+                      width = anchos),
+         
+         numericInput("intervalo", "intervalo",
+                      value = 20,
+                      min = 1,
+                      max = 200,
+                      step = 5,
                       width = anchos),
          
          numericInput("rng_max", "max", 
@@ -99,7 +106,7 @@ server <- function(input, output, session) {
   })
   
   stream <- reactiveFileReader(
-    intervalMillis = 5,
+    intervalMillis = \(x) as.numeric(input$intervalo),
     session,
     filePath  = 'output.txt',
     readFunc = readLines
@@ -111,9 +118,13 @@ server <- function(input, output, session) {
     texto <- stream()
     unido <- paste0(texto, collapse = "")
     letras <- strsplit(unido, split = "") |> unlist()
-    # largo <- length(letras)
-    # limite <- ifelse(largo < 1000, largo, 1000)
+    
+    # cortar texto
+    max_chr <- 15000
+    largo <- length(letras)
+    limite <- ifelse(largo < max_chr, largo, max_chr)
     # letras <- letras[(largo-limite):largo]
+    letras <- strtrim(letras, width = largo)
     unidas <- paste0(letras, sep = "", collapse = "")
     return(unidas)
   })
